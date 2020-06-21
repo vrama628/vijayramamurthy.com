@@ -1,0 +1,13 @@
+(library
+  (name wilty)
+  (modules wilty)
+  (libraries helpers))
+
+(executable
+  (name app)
+  (modules app)
+  (modes js))
+
+(alias
+  (name app)
+  (deps app.bc.js))

@@ -1,2 +1,10 @@
 (executable
-  (name main))
+  (name main)
+  (libraries 
+    tyxml fileutils
+    helpers wilty
+  ))
+
+(alias
+  (name default)
+  (deps (alias_rec app)))
