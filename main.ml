@@ -1,5 +1,5 @@
 type page = {
-  content : Html_types.html Tyxml_html.elt;
+  content : Tyxml_html.doc;
   path : string;
   has_js : bool;
 }
@@ -44,7 +44,7 @@ let doesn't_start_with_dot str =
 
 let () =
   let open Printf in
-  printf "Deleting old contents of `%s`\n" output_directory;
+  printf "Deleting old contents of %s\n" output_directory;
   let () =
     assert (Sys.file_exists output_directory && Sys.is_directory output_directory);
     FileUtil.ls output_directory
@@ -60,6 +60,8 @@ let () =
       sprintf "To work on this website, visit %s" repo_url;
     ])
   in
+  printf "Copying over ./static\n";
+  FileUtil.cp ~recurse:true ["static"] output_directory;
   printf "Generating pages\n";
   List.iter (fun {content; path; has_js} ->
     let output_path = in_output path in
