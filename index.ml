@@ -3,7 +3,7 @@ open Tyxml.Html
 
 let intro_row =
   div ~a:[a_class ["row"]] [
-    div ~a:[a_class ["col text-center"]] [
+    div ~a:[a_class ["col"; "text-center"]] [
       h1 ~a:[a_class ["display-1"]] [
         txt "Hi!";
         br ();
@@ -14,7 +14,7 @@ let intro_row =
 
 let social_row =
   div ~a:[a_class ["row"]] [
-    div ~a:[a_class ["col text-center"]] [
+    div ~a:[a_class ["col"; "text-center"]] [
       a ~a:[a_href "https://github.com/vrama628"] [
         img
           ~a:[a_style "width: 2em"]
@@ -29,8 +29,8 @@ let work_row =
   let flow_link content =
     a ~a:[a_href "https://flow.org/"] content
   in
-  div ~a:[a_class ["row justify-content-center mt-3"]] [
-    div ~a:[a_class ["col-sm-auto text-center"]] [
+  div ~a:[a_class ["row"; "justify-content-center"; "mt-3"]] [
+    div ~a:[a_class ["col-sm-auto"; "text-center"]] [
       txt "I work on ";
       flow_link [txt "Flow"];
       txt ".";

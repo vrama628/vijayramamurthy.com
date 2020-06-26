@@ -71,7 +71,7 @@ let () =
       let built_js =
         Filename.concat
           (Filename.concat build_path path)
-          "app.bc.js"; 
+          "app/app.bc.js"; 
       in
       let output_js = Filename.concat output_path "app.js" in
       FileUtil.cp [built_js] output_js
