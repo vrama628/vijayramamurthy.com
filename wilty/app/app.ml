@@ -1,6 +1,7 @@
 open Js_of_ocaml
 open Js_of_ocaml_tyxml.Tyxml_js
 open React
+open ReactiveData
 
 (* APP LOGIC *)
 
@@ -15,7 +16,7 @@ let decode = Base64.decode_exn ~alphabet:Base64.uri_safe_alphabet
 
 let text_to_encode_s, set_text_to_encode = S.create ""
 let encoded_text_s = S.map encode text_to_encode_s
-let wilty_s, set_wilty = S.create (true, "")
+let wilty_s, set_wilty = S.create None
 
 let value_of_input ~id =
   let input_opt = Dom_html.getElementById_exn id |> Dom_html.CoerceTo.input in
@@ -44,7 +45,7 @@ let wilty_handler _ =
   let lies_and_truths =
     List.map (fun l -> false, l) lies @ List.map (fun t -> true, t) truths
   in
-  set_wilty (List.nth lies_and_truths (Random.int (List.length lies_and_truths)));
+  set_wilty (Some (List.nth lies_and_truths (Random.int (List.length lies_and_truths))));
   false
   
 
@@ -86,13 +87,6 @@ let wilty_app =
   let open Html in
   div ~a:[a_class ["my-3"]] [
     label
-      ~a:[a_label_for Ids.lieCodeInput]
-      [txt "Lie code you received:"];
-    input ~a:[
-      a_id Ids.lieCodeInput;
-      a_class ["form-control"];
-    ] ();
-    label
       ~a:[a_label_for Ids.truthsInput]
       [txt "Truth(s) about yourself, newline-separated:"];
     textarea ~a:[
@@ -100,6 +94,13 @@ let wilty_app =
       a_class ["form-control"];
       a_rows 3;
     ] (txt "");
+    label
+      ~a:[a_label_for Ids.lieCodeInput]
+      [txt "Lie code you received:"];
+    input ~a:[
+      a_id Ids.lieCodeInput;
+      a_class ["form-control"];
+    ] ();
     div ~a:[
       a_class ["m-3"; "text-center"];
     ] [
@@ -111,22 +112,27 @@ let wilty_app =
         txt "Would I Lie to You?"
       ];
     ];
-    div [
-      R.Html.txt (S.map snd wilty_s)
-    ]
+    R.Html.div ~a:[
+      a_class ["bg-light"; "rounded"; "p-3"];
+    ] (
+      S.map (function 
+        | None -> []
+        | Some (is_truth, stmt) -> [
+            txt (if is_truth then "Truth:" else "Lie:");
+            br ();
+            txt stmt
+          ]
+        ) wilty_s
+      |> RList.from_signal
+    )
   ]
 
 let app =
   let open Html in
-  div ~a:[a_class ["col-md-8"]] [
-    h1
-      ~a:[a_class ["text-center"]]
-      [txt "Would I Lie to You?"];
-    form [
-      send_lies_app;
-      hr ();
-      wilty_app;
-    ]
+  form [
+    send_lies_app;
+    hr ();
+    wilty_app;
   ]
     
 
