@@ -3,8 +3,13 @@ open Tyxml.Html
 
 let instructions = [
   h3 [txt "How to play"];
-  p [txt "\
-    In a round of Would I Lie To You, the person whose turn it is reads a \
+  p [
+    txt "In a round of ";
+    a ~a:[
+      a_href "https://www.youtube.com/watch?v=B94q7gUu75k";
+      a_target "_blank";
+    ] [txt "Would I Lie To You"];
+    txt ", the person whose turn it is reads a \
     statement to the other players. \
     The other players then take some time to ask the person questions about \
     the statement until they feel they can guess whether the statement is a \
@@ -29,6 +34,9 @@ let instructions = [
     \"Lie code you received\" box. \
     When it's your turn, click the \"Would I Lie to You?\" button and the app \
     will randomly pick a truth or lie for you to present to the other players. \
+    The app removes this truth/lie from the corresponding input, so if \
+    you play another turn, there isn't a chance of getting a truth/lie \
+    you've already gotten. \
   "]
 ]
 
