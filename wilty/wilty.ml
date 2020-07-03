@@ -40,7 +40,7 @@ let instructions = [
   "]
 ]
 
-let content =
+let content js =
   Template.f
     ~title:"Would I Lie to You?"
     ~body:[
@@ -52,7 +52,5 @@ let content =
           ] @ instructions)
         ];
       ];
-      script
-        ~a:[a_src "./app.js"]
-        (txt "")
+      script (cdata_script js)
     ]

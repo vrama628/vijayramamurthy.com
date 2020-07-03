@@ -1,7 +1,9 @@
+type content =
+  | Page of Tyxml_html.doc (* pages without js to add *)
+  | App of (string -> Tyxml_html.doc) (* pages with js to add *)
 type page = {
-  content : Tyxml_html.doc;
+  content : content;
   path : string;
-  has_js : bool;
 }
 
 (* CONSTANTS / WEBSITE LAYOUT *)
@@ -12,14 +14,12 @@ let build_path = "_build/default"
 
 let pages : page list = [
   {
-    content = Index.content;
+    content = Page Index.content;
     path = "";
-    has_js = false;
   };
   {
-    content = Wilty.content;
+    content = App Wilty.content;
     path = "wilty";
-    has_js = true;
   };
 ]
 
@@ -38,6 +38,12 @@ let write_html_to_file name content =
   let fmt = Format.formatter_of_out_channel out in
   Tyxml.Html.pp () fmt content;
   close_out out
+
+let read_string_from_file name =
+  let in_ = open_in name in
+  let content = really_input_string in_ (in_channel_length in_) in
+  close_in in_;
+  content
 
 let doesn't_start_with_dot str =
   String.index_opt str '.' <> Some 0
@@ -63,17 +69,21 @@ let () =
   printf "Copying over ./static\n";
   FileUtil.cp ~recurse:true ["static"] output_directory;
   printf "Generating pages\n";
-  List.iter (fun {content; path; has_js} ->
+  List.iter (fun {content; path} ->
     let output_path = in_output path in
     FileUtil.mkdir ~parent:true output_path; 
-    write_html_to_file (Filename.concat output_path "index.html") content;
-    if has_js then
-      let built_js =
-        Filename.concat
-          (Filename.concat build_path path)
-          "app/app.bc.js"; 
-      in
-      let output_js = Filename.concat output_path "app.js" in
-      FileUtil.cp [built_js] output_js
+    let html = 
+      match content with
+      | Page html -> html
+      | App mk_html ->
+        let js_path =
+          Filename.concat
+            (Filename.concat build_path path)
+            "app/app.bc.js"; 
+        in
+        let js = read_string_from_file js_path in
+        mk_html js
+    in
+    write_html_to_file (Filename.concat output_path "index.html") html
   ) pages;
   printf "SUCCESS! website written to %s\n" output_directory
