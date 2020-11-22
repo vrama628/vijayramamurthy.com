@@ -1,0 +1,9 @@
+(executable
+  (name app)
+  (libraries js_of_ocaml js_of_ocaml-tyxml base64)
+  (modes js)
+  (preprocess (pps js_of_ocaml-ppx)))
+
+(alias
+  (name app)
+  (deps app.bc.js))

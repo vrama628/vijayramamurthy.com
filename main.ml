@@ -21,6 +21,10 @@ let pages : page list = [
     content = App Wilty.content;
     path = "wilty";
   };
+  {
+    content = App Sudoku.content;
+    path = "sudoku";
+  };
 ]
 
 (* WEBSITE GENERATION SCRIPT *)

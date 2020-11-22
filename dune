@@ -2,7 +2,7 @@
   (name main)
   (libraries 
     tyxml fileutils
-    helpers wilty
+    helpers wilty sudoku
   ))
 
 (alias
