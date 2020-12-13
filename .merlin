@@ -2,6 +2,7 @@ EXCLUDE_QUERY_DIR
 B /home/vijay/.opam/argue/lib/bytes
 B /home/vijay/.opam/argue/lib/fileutils
 B /home/vijay/.opam/argue/lib/ocaml
+B /home/vijay/.opam/argue/lib/omd
 B /home/vijay/.opam/argue/lib/re
 B /home/vijay/.opam/argue/lib/seq
 B /home/vijay/.opam/argue/lib/stdlib-shims
@@ -16,6 +17,7 @@ B _build/default/wilty/.wilty.objs/byte
 S /home/vijay/.opam/argue/lib/bytes
 S /home/vijay/.opam/argue/lib/fileutils
 S /home/vijay/.opam/argue/lib/ocaml
+S /home/vijay/.opam/argue/lib/omd
 S /home/vijay/.opam/argue/lib/re
 S /home/vijay/.opam/argue/lib/seq
 S /home/vijay/.opam/argue/lib/stdlib-shims

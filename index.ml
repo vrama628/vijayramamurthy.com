@@ -2,46 +2,70 @@ open Helpers
 open Tyxml.Html
 
 let intro_row =
-  div ~a:[a_class ["row"]] [
+  div ~a:[a_class ["row"; "my-3"]] [
     div ~a:[a_class ["col"; "text-center"]] [
       h1 ~a:[a_class ["display-1"]] [
-        txt "Hi!";
-        br ();
-        txt "I'm Vijay.";
+        txt "Hi! I'm Vijay.";
       ]
     ]
   ]
 
-let social_row =
-  div ~a:[a_class ["row"]] [
-    div ~a:[a_class ["col"; "text-center"]] [
-      a ~a:[a_href "https://github.com/vrama628"] [
-        img
-          ~a:[a_style "width: 2em"]
-          ~src:"/static/icon-github.svg"
-          ~alt:"GitHub"
-          ()
-      ]
-    ]
+let info name content =
+  div ~a:[a_class ["my-3"]] (
+    h1 [txt name] ::
+    content
+  )
+
+let work_info =
+  info "Work" [
+    txt "I work on ";
+    a ~a:[a_href "https://flow.org/"] [txt "Flow"];
+    txt ".";
   ]
 
-let work_row =
-  let flow_link content =
-    a ~a:[a_href "https://flow.org/"] content
+let papers_info =
+  let paper name links source =
+    div ~a:[a_class ["my-1"]] [
+      div (
+        txt (Printf.sprintf "\"%s\"" name) :: (
+          List.map (fun (text, href) -> [
+            txt " (";
+            a ~a:[a_href href] [txt text];
+            txt ")"
+          ]) links
+          |> List.flatten
+        )
+      );
+      div ~a:[a_class ["text-right"; "font-weight-light"]] [
+        txt  source
+      ];
+    ]
   in
-  div ~a:[a_class ["row"; "justify-content-center"; "mt-3"]] [
-    div ~a:[a_class ["col-sm-auto"; "text-center"]] [
-      txt "I work on ";
-      flow_link [txt "Flow"];
-      txt ".";
-      br ();
-      flow_link [
-        img
-          ~a:[a_style "max-width: 100px"]
-          ~src:"/static/flow.svg"
-          ~alt:"Flow"
-          ()
+  info "Papers" [
+    paper
+      "Program Equivalence for Assisted Grading of Functional Programs"
+      [
+        ("pdf", "static/oopsla-2020.pdf");
+        ("extended version", "https://arxiv.org/pdf/2010.08051.pdf")
       ]
+      "Published in OOPSLA 2020";
+    paper
+      "Zeus: Algorithmic Program Equivalence"
+      [("pdf", "static/senior-thesis.pdf")]
+      "Senior Honors Thesis, 2019"
+  ]
+
+let links_info =
+  info "Links" [
+    p [a ~a:[a_href "https://github.com/vrama628"] [txt "GitHub"]]
+  ]
+
+let info_row =
+  div ~a:[a_class ["row"; "my-3"; "justify-content-center"]] [
+    div ~a:[a_class["col-md-8"]] [
+      work_info;
+      papers_info;
+      links_info;
     ]
   ]
 
@@ -49,7 +73,6 @@ let content = Template.f ~title:"Vijay Ramamurthy"
   ~body:[
     div ~a:[a_class ["container"]] [
       intro_row;
-      social_row;
-      work_row;
+      info_row;
     ]
   ]

@@ -164,14 +164,16 @@ let board =
   ] (List.init 3 row)
 
 let solve_handler =
-  ...
+  failwith "TODO"
 
 let solve_button =
   let open Html in
   button ~a:[
-    a_class ["btn", "btn-primary"];
+    a_class ["btn"; "btn-primary"];
     a_button_type `Button;
     a_onclick solve_handler
+  ] [
+    txt "Solve"
   ]
 
 let app =
