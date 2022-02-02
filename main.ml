@@ -9,7 +9,7 @@ type page = {
 (* CONSTANTS / WEBSITE LAYOUT *)
 
 let output_directory = "vrama628.github.io"
-let repo_url = "https://github.com/vrama628/vijayramamurthy.me"
+let repo_url = "https://github.com/vrama628/vijayramamurthy.com"
 let build_path = "_build/default"
 
 let pages : page list = [
@@ -63,7 +63,7 @@ let () =
   in
   printf "Writing CNAME and README.md\n";
   let () =
-    write_string_to_file (in_output "CNAME") "vijayramamurthy.me";
+    write_string_to_file (in_output "CNAME") "vijayramamurthy.com";
     write_string_to_file (in_output "README.md") (String.concat "\n" [
       "This website was generated automatically.";
       "Don't make changes to this website directly.";
