@@ -18,9 +18,9 @@ let info name content =
 
 let work_info =
   info "Work" [
-    txt "I work on ";
+    txt "I worked on ";
     a ~a:[a_href "https://flow.org/"] [txt "Flow"];
-    txt ".";
+    txt " July 2019 - January 2022.";
   ]
 
 let papers_info =
