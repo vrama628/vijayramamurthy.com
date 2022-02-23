@@ -23,6 +23,10 @@ let work_info =
     txt " starting in July 2019 and chose to leave in January 2022 to take a few months off.";
     br ();
     txt "I plan to shift my focus to startup companies when I resume working.";
+    br ();
+    txt "Here is my ";
+    a ~a:[a_href "static/Vijay-Ramamurthy-resume.pdf"] [txt "resume"];
+    txt ".";
   ]
 
 let papers_info =
