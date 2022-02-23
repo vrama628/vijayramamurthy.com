@@ -20,7 +20,9 @@ let work_info =
   info "Work" [
     txt "I worked on ";
     a ~a:[a_href "https://flow.org/"] [txt "Flow"];
-    txt " July 2019 - January 2022.";
+    txt " starting in July 2019 and chose to leave in January 2022 to take a few months off.";
+    br ();
+    txt "I plan to shift my focus to startup companies when I resume working.";
   ]
 
 let papers_info =
