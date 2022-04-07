@@ -20,12 +20,10 @@ let work_info =
   info "Work" [
     txt "I worked at Facebook/Meta on ";
     a ~a:[a_href "https://flow.org/"] [txt "Flow"];
-    txt " starting in July 2019 and chose to leave in January 2022 to take a few months off.";
+    txt " starting in July 2019 and chose to leave in January 2022.";
     br ();
-    txt "I plan to shift my focus to startup companies when I resume working.";
-    br ();
-    txt "Here is my ";
-    a ~a:[a_href "static/Vijay-Ramamurthy-resume.pdf"] [txt "resume"];
+    txt "I currently work at ";
+    a ~a:[a_href "https://www.osohq.com/"] [txt "Oso"];
     txt ".";
   ]
 
@@ -63,7 +61,8 @@ let papers_info =
 
 let links_info =
   info "Links" [
-    p [a ~a:[a_href "https://github.com/vrama628"] [txt "GitHub"]]
+    p [a ~a:[a_href "https://github.com/vrama628"] [txt "GitHub"]];
+    p [a ~a:[a_href "static/Vijay-Ramamurthy-resume.pdf"] [txt "Resume"]];
   ]
 
 let info_row =
