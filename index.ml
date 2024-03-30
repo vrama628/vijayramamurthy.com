@@ -56,6 +56,14 @@ let writing_info =
     "Writing"
     [
       writing
+        "Is Polar Turing-Complete?"
+        [
+          ( "article",
+            "https://www.osohq.com/post/is-polar-turing-complete-and-why-i-hope-not"
+          );
+        ]
+        "Oso Blog, December 2023";
+      writing
         "Why I don't play Pokemon"
         ["article", "https://www.osohq.com/post/why-i-dont-play-pokemon"]
         "Oso Blog, August 2022";
@@ -87,7 +95,7 @@ let projects_info =
         [
           li
             [
-              a ~a:[a_href "http://dominai.io"] [txt "DominAI"];
+              a ~a:[a_href "https://github.com/vrama628/dominai"] [txt "DominAI"];
               txt
                 " A server that lets you write code to play the card game \
                  Dominion";
